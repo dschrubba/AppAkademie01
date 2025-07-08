@@ -46,7 +46,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   
-  EdgeInsetsGeometry elementPadding = EdgeInsets.all(16);
+  EdgeInsetsGeometry elementPadding = EdgeInsets.all(8);
 
   @override
   Widget build(BuildContext context) {
@@ -65,22 +65,44 @@ class _MyHomePageState extends State<MyHomePage> {
               padding: elementPadding,
               color: Colors.blueAccent,
               child: Center(
-                child: Text("Column Element 1 (element 2 is a row)"),
+                child: RichText(
+                  text: TextSpan(
+                    text: "Column Element 1 (element 2 is a row)",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w800
+                      )
+                    )
+                  ),
               )
             ),
             Container(
               width: double.infinity,
               padding: elementPadding,
-              color: Colors.purple,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: 8,
                 children: [
                   for (int i = 0; i < widget.rowContents.length; i++) (
                     Flexible(
-                      flex: 1,
-                      child: SizedBox(
-                        child: Text("Row $i\n\n${widget.rowContents[i]}"),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Color.lerp(Colors.amber, Colors.red, widget.rowContents.length / (i+1)),
+                          borderRadius: BorderRadius.all(Radius.circular(16))
+                        ),
+                        padding: EdgeInsets.all(8),
+                        child: SizedBox(
+                          child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                            spacing: 8,
+                            children: [
+                              Text("Row $i"),
+                              Text(widget.rowContents[i]),
+                            ],
+                          )
+                        )
                       )
                     )
                   ),
