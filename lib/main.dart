@@ -108,6 +108,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ],
               )
+            ),
+            Divider(),
+            Container(
+              padding: elementPadding,
+              child: Text(
+                "Hello world!"
+              ),
             )
           ],
         ),
